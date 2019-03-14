@@ -13,6 +13,7 @@
 
 #include "bst.h"
 #include <stdlib.h>
+#include "general.h"
 
 struct Node{
   int value;
@@ -30,7 +31,12 @@ Bst new_bst()
 
 void delete_bst(Bst bst)
 {
-
+  if (bst != 0)
+  {
+    sfree(bst);
+    delete_bst(bst->left_subtree);
+    delete_bst(bst->right_subtree);
+  }
 }
 
 /**
@@ -38,26 +44,64 @@ void delete_bst(Bst bst)
 */
 int get_depth(Bst bst)
 {
-  if (bst == 0) {
+  if (bst == 0)
+  {
     return 0;
   }
-  else{
+
+  else if(bst->left_subtree == 0 && bst->right_subtree == 0)
+  {
     return 1;
   }
 
+  else
+  {
+    if (get_depth(bst->left_subtree)> get_depth(bst->right_subtree)) {
+      return 1+get_depth(bst->left_subtree);
+    }
+    return 1+get_depth(bst->right_subtree);
+  }
 }
-
+Bst new_node( int value){
+  Bst bst = (Bst)malloc(sizeof(Node));
+  bst->value = value;
+  bst->left_subtree = 0;
+  bst->right_subtree = 0;
+  return bst;
+}
 /**
 *** Adds a value to the BST
 */
 void add(Bst* bst, int value)
 {
-  Bst new_node = (Bst) malloc(sizeof(struct Node));
-  new_node->value = value;
-  new_node->left_subtree = 0;
-  new_node->right_subtree = 0;
-  *bst = new_node;
+  if (bst == 0)
+  {
+    (*bst) = new_node(value);
+  }
 
+  else if(value <= (*bst)->value)
+  {
+    if ((*bst)->left_subtree == 0)
+    {
+      (*bst)->left_subtree = new_node(value);
+    }
+    else
+    {
+      add(&(*bst)->left_subtree, value);
+    }
+  }
+
+  else
+  {
+    if ((*bst)->right_subtree == 0)
+    {
+      (*bst)->right_subtree = new_node(value);
+    }
+    else
+    {
+      add(&(*bst)->right_subtree, value);
+    }
+  }
 }
 
 /**
@@ -65,7 +109,7 @@ void add(Bst* bst, int value)
 */
 int root_value(Bst bst)
 {
-  return 0;
+  return bst->value;
 }
 
 /**
