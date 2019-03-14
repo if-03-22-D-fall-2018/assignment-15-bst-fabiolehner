@@ -12,7 +12,6 @@
 */
 
 #include "bst.h"
-#include "general.h"
 #include <stdlib.h>
 #include "general.h"
 
@@ -21,7 +20,10 @@ struct Node{
   Node* left_subtree;
   Node* right_subtree;
 };
-
+/**
+*** Initializes the binary search tree. Deletes all existing nodes in the tree
+*** @return The number of deleted nodes
+*/
 Bst new_bst()
 {
   return 0;
@@ -46,12 +48,8 @@ int get_depth(Bst bst)
   {
     return 0;
   }
-<<<<<<< HEAD
 
   else if(bst->left_subtree == 0 && bst->right_subtree == 0)
-=======
-  else
->>>>>>> b0d2a6e49e9c0b19497500aa11152c4db795d066
   {
     return 1;
   }
@@ -111,16 +109,7 @@ void add(Bst* bst, int value)
 */
 int root_value(Bst bst)
 {
-<<<<<<< HEAD
   return bst->value;
-=======
-  if (bst == 0) {
-    return 0;
-  }
-  else{
-    return bst->value;
-  }
->>>>>>> b0d2a6e49e9c0b19497500aa11152c4db795d066
 }
 
 /**
@@ -128,7 +117,7 @@ int root_value(Bst bst)
 */
 Bst left_subtree(Bst root)
 {
-  return root-> left_subtree;
+  return 0;
 }
 
 /**
@@ -136,7 +125,7 @@ Bst left_subtree(Bst root)
 */
 Bst right_subtree(Bst root)
 {
-  return root->right_subtree;
+  return 0;
 }
 
 /**
